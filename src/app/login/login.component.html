@@ -1,0 +1,38 @@
+<div class="login-wrapper">
+  <div class="card login-card">
+    <div class="login-header">
+      <span class="login-logo">🔒</span>
+      <h2>System Sign In chikun</h2>
+      <p>Please enter your registered 10-digit mobile number to log in.</p>
+    </div>
+
+    <form (ngSubmit)="login()" class="login-form">
+      <!-- Alert Messages inside Login Card -->
+      <div class="alert alert-error" *ngIf="errorMsg" style="margin-bottom: 1.25rem;">
+        <span class="alert-text">{{ errorMsg }}</span>
+        <button type="button" class="alert-close" (click)="dismissAlerts()">✕</button>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Registered Mobile Number *</label>
+        <input 
+          type="text" 
+          id="phone" 
+          name="phone" 
+          placeholder="Enter your mobile number" 
+          [(ngModel)]="phoneNumberInput" 
+          required
+          pattern="[0-9]+"
+          #phone="ngModel">
+        <span class="validation-error" *ngIf="phone.touched && !phoneNumberInput">
+          Mobile number is required.
+        </span>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="loggingIn || !phoneNumberInput">
+        <span *ngIf="!loggingIn">Sign In</span>
+        <span *ngIf="loggingIn" class="loading-dots">Verifying...</span>
+      </button>
+    </form>
+  </div>
+</div>

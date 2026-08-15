@@ -5,21 +5,23 @@ import { ProductService } from './services/product.service';
 import { UserService } from './services/user.service';
 import { Product } from './models/product.model';
 import { User } from './models/user.model';
+import { LandPageComponent } from './land-page/land-page.component';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LandPageComponent, LoginComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+  activeView: 'landpage' | 'portal' = 'landpage';
   title = 'Product Management Portal';
   products: Product[] = [];
   
   // Auth state
   currentUser: User | null = null;
-  phoneNumberInput = '';
   
   // Model for the product form
   newProduct: Product = {
@@ -46,7 +48,6 @@ export class AppComponent implements OnInit {
   // State flags
   loading = false;
   submitting = false;
-  loggingIn = false;
   errorMsg = '';
   successMsg = '';
 
@@ -128,30 +129,10 @@ export class AppComponent implements OnInit {
     this.cardSize = size;
   }
 
-  login(): void {
-    if (!this.phoneNumberInput || this.phoneNumberInput.trim() === '') {
-      this.errorMsg = 'Please enter a valid mobile number.';
-      return;
-    }
-
-    this.loggingIn = true;
-    this.errorMsg = '';
-    this.successMsg = '';
-
-    this.userService.login(this.phoneNumberInput.trim()).subscribe({
-      next: (user) => {
-        this.currentUser = user;
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.loggingIn = false;
-        this.phoneNumberInput = '';
-        this.loadProducts(); // Load products for logged in user
-      },
-      error: (err) => {
-        console.error(err);
-        this.errorMsg = 'Access Denied. Mobile number is not registered in the database.';
-        this.loggingIn = false;
-      }
-    });
+  onLoginSuccess(user: User): void {
+    this.currentUser = user;
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    this.loadProducts();
   }
 
   logout(): void {

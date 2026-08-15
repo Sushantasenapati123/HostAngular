@@ -849,4 +849,45 @@
   font-size: 0.875rem;
 }
 
+/* View Switcher Bar */
+.view-switcher-bar {
+  display: flex;
+  background-color: #1e293b;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
+  justify-content: center;
+  border-bottom: 2px solid #0f172a;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.switcher-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.switcher-btn:hover {
+  color: #ffffff;
+  background-color: #334155;
+}
+
+.switcher-btn.active {
+  color: #ffffff;
+  background-color: #e24d35;
+  box-shadow: 0 2px 4px rgba(226, 77, 53, 0.2);
+}
+
 
