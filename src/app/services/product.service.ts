@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  // API URL configured for the demo deployment.
-  // Change to http://localhost:5228/api/TestModel for local testing.
-  private apiUrl = 'https://demo123.runasp.net/api/TestModel';
+  private apiUrl = `${environment.apiUrl}/TestModel`;
 
   constructor(private http: HttpClient) {}
 
