@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-land-page',
@@ -10,20 +11,19 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./land-page.component.css']
 })
 export class LandPageComponent {
-  @Output() loginClick = new EventEmitter<void>();
-
   contactName: string = '';
   contactEmail: string = '';
   contactPhone: string = '';
   contactMessage: string = '';
   formSubmitted: boolean = false;
-
   showSuccessModal: boolean = false;
+
+  constructor(private router: Router) {}
 
   onLoginClick(): void {
     const hostname = window.location.hostname;
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
-      this.loginClick.emit();
+      this.router.navigate(['/login']);
     } else {
       window.location.href = 'https://login.uucarchitects.in';
     }
