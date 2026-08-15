@@ -57,7 +57,15 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Check if user is already logged in (session persistence)
+    // 1. Check if loading via subdomain
+    const hostname = window.location.hostname;
+    if (hostname.startsWith('login.')) {
+      this.activeView = 'portal';
+    } else {
+      this.activeView = 'landpage';
+    }
+
+    // 2. Check if user is already logged in (session persistence)
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
       try {
@@ -67,6 +75,12 @@ export class AppComponent implements OnInit {
         localStorage.removeItem('currentUser');
       }
     }
+  }
+
+  // Getter to hide the switcher bar if on the login subdomain
+  get isSubdomain(): boolean {
+    const hostname = window.location.hostname;
+    return hostname.startsWith('login.');
   }
 
   // Getters for Client-Side Search and Pagination

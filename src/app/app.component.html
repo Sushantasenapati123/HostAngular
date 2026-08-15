@@ -1,4 +1,4 @@
-<div class="view-switcher-bar">
+<div class="view-switcher-bar" *ngIf="!isSubdomain">
   <button class="switcher-btn" [class.active]="activeView === 'landpage'" (click)="activeView = 'landpage'">
     🏡 Homeswort Real Estate Showcase
   </button>

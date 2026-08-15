@@ -20,6 +20,15 @@ export class LandPageComponent {
 
   showSuccessModal: boolean = false;
 
+  onLoginClick(): void {
+    const hostname = window.location.hostname;
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      this.loginClick.emit();
+    } else {
+      window.location.href = 'https://login.uucarchitects.in';
+    }
+  }
+
   onSubmitContact() {
     this.formSubmitted = true;
     setTimeout(() => {
