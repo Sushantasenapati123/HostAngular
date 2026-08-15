@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +16,10 @@ export class LoginComponent {
   loggingIn = false;
   errorMsg = '';
 
-  @Output() loginSuccess = new EventEmitter<User>();
-
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   login(): void {
     if (!this.phoneNumberInput || this.phoneNumberInput.trim() === '') {
@@ -32,7 +33,10 @@ export class LoginComponent {
     this.userService.login(this.phoneNumberInput.trim()).subscribe({
       next: (user) => {
         this.loggingIn = false;
-        this.loginSuccess.emit(user);
+        // Save current user session in local storage
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        // Redirect to protected dashboard route
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         console.error(err);

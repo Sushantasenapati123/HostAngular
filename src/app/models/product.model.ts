@@ -7,4 +7,5 @@ export interface Product {
   createdBy?: string;
   createdDate?: Date | string;
   updatedDate?: Date | string | null;
+  documentPath?: string;
 }
