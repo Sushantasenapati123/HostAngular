@@ -1,48 +1,22 @@
-<div class="app-container">
-  <!-- Login Screen -->
-  <ng-template #loginView>
-    <div class="login-wrapper">
-      <div class="card login-card">
-        <div class="login-header">
-          <span class="login-logo">🔒</span>
-          <h2>System Sign In chikun</h2>
-          <p>Please enter your registered 10-digit mobile number to log in.</p>
-        </div>
+<div class="view-switcher-bar">
+  <button class="switcher-btn" [class.active]="activeView === 'landpage'" (click)="activeView = 'landpage'">
+    🏡 Homeswort Real Estate Showcase
+  </button>
+  <button class="switcher-btn" [class.active]="activeView === 'portal'" (click)="activeView = 'portal'">
+    📦 Product Catalog Portal
+  </button>
+</div>
 
-        <form (ngSubmit)="login()" class="login-form">
-          <!-- Alert Messages inside Login Card -->
-          <div class="alert alert-error" *ngIf="errorMsg" style="margin-bottom: 1.25rem;">
-            <span class="alert-text">{{ errorMsg }}</span>
-            <button type="button" class="alert-close" (click)="dismissAlerts()">✕</button>
-          </div>
+<div *ngIf="activeView === 'landpage'">
+  <app-land-page (loginClick)="activeView = 'portal'"></app-land-page>
+</div>
 
-          <div class="form-group">
-            <label for="phone">Registered Mobile Number *</label>
-            <input 
-              type="text" 
-              id="phone" 
-              name="phone" 
-              placeholder="Enter your mobile number" 
-              [(ngModel)]="phoneNumberInput" 
-              required
-              pattern="[0-9]+"
-              #phone="ngModel">
-            <span class="validation-error" *ngIf="phone.touched && !phoneNumberInput">
-              Mobile number is required.
-            </span>
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-block" [disabled]="loggingIn || !phoneNumberInput">
-            <span *ngIf="!loggingIn">Sign In</span>
-            <span *ngIf="loggingIn" class="loading-dots">Verifying...</span>
-          </button>
-        </form>
-      </div>
-    </div>
-  </ng-template>
+<div *ngIf="activeView === 'portal'" class="app-container">
+  <!-- Standalone Login Component -->
+  <app-login *ngIf="!currentUser" (loginSuccess)="onLoginSuccess($event)"></app-login>
 
   <!-- Authenticated Application View -->
-  <div *ngIf="currentUser; else loginView">
+  <div *ngIf="currentUser">
     <!-- Header -->
     <header class="app-header">
       <div class="header-logo">
