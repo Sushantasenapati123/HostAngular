@@ -457,6 +457,42 @@
   margin: 0;
 }
 
+/* Clients Section */
+.clients-section {
+  padding: 6rem 2rem;
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.client-card {
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+  border: none;
+}
+
+.client-card:hover {
+  transform: translateY(-3px);
+}
+
+.client-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
 /* Contact Section */
 .contact-grid {
   display: grid;
@@ -615,6 +651,9 @@
   .amenities-grid {
     grid-template-columns: 1fr 1fr;
   }
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
@@ -630,7 +669,7 @@
     height: 80vh;
   }
   
-  .about-section, .gallery-section, .advantages-section, .contact-section {
+  .about-section, .gallery-section, .advantages-section, .clients-section, .contact-section {
     padding: 4rem 1rem;
   }
   
@@ -639,7 +678,7 @@
     gap: 3rem;
   }
   
-  .amenities-grid {
+  .amenities-grid, .clients-grid {
     grid-template-columns: 1fr;
   }
   
