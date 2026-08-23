@@ -12,6 +12,7 @@
         <a href="#about">About</a>
         <a href="#gallery">Gallery</a>
         <a href="#advantages">Amenities</a>
+        <a href="#clients">Clients</a>
         <a href="#contact">Contact</a>
       </div>
       <div class="nav-cta">
@@ -71,7 +72,7 @@
     <div class="quote-container">
       <div class="quote-mark">“</div>
       <p class="quote-text">Every home is designed as if it were our own, ensuring complete adherence to Vastu principles alongside the latest modern architectural trends with creative design sensibility.</p>
-      <h4 class="quote-author">— Er. Yashwant Senapati & The Design Team</h4>
+      <h4 class="quote-author">— Er. Yoshabant Senapati & The Design Team</h4>
     </div>
   </section>
 
@@ -84,22 +85,11 @@
         <h2 class="main-title">A Closer Look</h2>
       </div>
       <div class="gallery-grid">
-        <div class="gallery-item large">
-          <img src="/assets/images/homeswort_kitchen.jpg" alt="Kitchen Interior">
+        <div *ngFor="let img of galleryImages; let i = index" 
+             [class]="'gallery-item' + (i % 3 === 0 ? ' large' : '')">
+          <img [src]="img.src" [alt]="img.alt">
           <div class="gallery-hover">
-            <span>Modern Kitchen</span>
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="/assets/images/homeswort_living.jpg" alt="Living Room">
-          <div class="gallery-hover">
-            <span>Living Room</span>
-          </div>
-        </div>
-        <div class="gallery-item">
-          <img src="/assets/images/homeswort_balcony.jpg" alt="Balcony View">
-          <div class="gallery-hover">
-            <span>Sunset Balcony</span>
+            <span>{{ img.title }}</span>
           </div>
         </div>
       </div>
@@ -144,6 +134,22 @@
           <div class="amenity-icon">🍷</div>
           <h3>Wine Lounge</h3>
           <p>Climate-controlled private tasting room with premium custom wood storage shelves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clients Section -->
+  <section id="clients" class="clients-section">
+    <div class="watermark-bg">CLIENTS</div>
+    <div class="section-container">
+      <div class="section-header-center">
+        <h4 class="mini-title">OUR PARTNERS</h4>
+        <h2 class="main-title">Our Clients</h2>
+      </div>
+      <div class="clients-grid">
+        <div class="client-card" *ngFor="let client of clients">
+          <img [src]="client.logo" [alt]="client.name">
         </div>
       </div>
     </div>
