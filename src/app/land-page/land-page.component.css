@@ -569,12 +569,12 @@
 .info-details {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .info-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1.25rem;
 }
 
@@ -588,12 +588,30 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info-label {
+  font-family: var(--hs-font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--hs-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .info-item p {
   font-size: 0.85rem;
   color: var(--hs-gray-dark);
   margin: 0;
+  line-height: 1.5;
 }
 
 /* Footer */
